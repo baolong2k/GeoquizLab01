@@ -8,11 +8,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class        MainActivity extends AppCompatActivity {
 
     public Button mTrueButton;
     public Button mFalseButton;
     private Button mNextButton;
+    private Button mPrevButton;
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[] {
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
     }
+
+
 
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PrevOnclick();
 
         mQuestionTextView = findViewById(R.id.question_text_view);
 
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 //            Toast.makeText(MainActivity.this, "Incorrect!", Toast.LENGTH_SHORT).show();
             // Does nothing yet, but soon!
         });
+
 
         mFalseButton = findViewById(R.id.false_button);
         mFalseButton.setOnClickListener(v -> {
@@ -72,7 +77,22 @@ public class MainActivity extends AppCompatActivity {
             updateQuestion();
         });
 
+//        mPrevButton = findViewById(R.id.pre_button);
+//        mPrevButton.setOnClickListener(v ->{
+//            mCurrentIndex = (mCurrentIndex - 1) % mQuestionBank.length;
+//            updateQuestion();
+//        })
         updateQuestion();
     }
+    private void updatePrev() throws ArrayIndexOutOfBoundsException{
+        if (mCurrentIndex > 0){
+            mCurrentIndex = (mCurrentIndex - 1) % mQuestionBank.length;
+            updateQuestion();
+        }
 
+    }
+    private void PrevOnclick(){
+        mPrevButton = findViewById(R.id.pre_button);
+        mPrevButton.setOnClickListener(v -> updatePrev());
+    }
 }
