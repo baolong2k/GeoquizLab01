@@ -52,5 +52,12 @@
                 android:drawablePadding="4dp"
                 tools:ignore="ButtonStyle"
                 android:text="@string/pre_button" />
+
         </LinearLayout>
-    </LinearLayout>
+
+    <Button
+        android:id="@+id/cheat_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cheat_button" />
+</LinearLayout>
